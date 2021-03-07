@@ -19,13 +19,13 @@ namespace E_CommerceApi.Controllers
             attributeService = _attributeService;
         }
         [HttpPost]
-        [Route("GetAllAttributes")]
+        [Route("GetAll")]
         public async Task<AllAttributes> GetAllAttributes()
         {
             return await attributeService.GetAll();
         }
         [HttpPost]
-        [Route("AddAttribute")]
+        [Route("Add")]
         public async Task<BaseResponse> AddAttribute([FromBody] Models.dbModels.Attribute attribute)
         {
             return await attributeService.Add(attribute);
