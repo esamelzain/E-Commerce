@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace E_CommerceApi.Models.dbModels
@@ -18,6 +19,7 @@ namespace E_CommerceApi.Models.dbModels
         public Nullable<System.DateTime> DateModified { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        [JsonIgnore]
         public virtual AttributeType AttributeType { get; set; }
     }
 }

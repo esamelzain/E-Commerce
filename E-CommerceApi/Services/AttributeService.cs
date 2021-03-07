@@ -10,13 +10,17 @@ namespace E_CommerceApi.Services
 {
     public class AttributeService
     {
-        private readonly ApplicationDbContext _db ;
+        private readonly ApplicationDbContext _db;
+        public AttributeService(ApplicationDbContext db)
+        {
+            _db = db;
+        }
         public async Task<AllAttributes> GetAll()
         {
             try
             {
-                var dbAttributes = await _db.Attributes.Where(attr=> (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
-                if (dbAttributes.Count>0)
+                var dbAttributes = await _db.Attributes.Where(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
+                if (dbAttributes.Count > 0)
                 {
                     return new AllAttributes
                     {
@@ -39,7 +43,7 @@ namespace E_CommerceApi.Services
                         }
                     };
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -57,7 +61,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                var dbAttribute = _db.Attributes.SingleOrDefault(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed&&attr.Id==Id);
+                var dbAttribute = _db.Attributes.SingleOrDefault(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
                 if (dbAttribute != null)
                 {
                     return new Models.vModels.Attribute
@@ -95,11 +99,12 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public BaseResponse Add(Models.dbModels.Attribute Attribute)
+        public async Task<BaseResponse> Add(Models.dbModels.Attribute Attribute)
         {
             try
             {
-                _db.Attributes.Add(Attribute);
+                await _db.Attributes.AddAsync(Attribute);
+                await _db.SaveChangesAsync();
                 return new BaseResponse
                 {
                     Message = new ResponseMessage

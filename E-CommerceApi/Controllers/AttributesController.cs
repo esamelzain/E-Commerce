@@ -1,4 +1,5 @@
 ﻿using E_CommerceApi.Models.vModels;
+using E_CommerceApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,11 +13,22 @@ namespace E_CommerceApi.Controllers
     [ApiController]
     public class AttributesController : ControllerBase
     {
+        private readonly AttributeService attributeService;
+        public AttributesController(AttributeService _attributeService)
+        {
+            attributeService = _attributeService;
+        }
         [HttpPost]
         [Route("GetAllAttributes")]
         public async Task<AllAttributes> GetAllAttributes()
         {
-            return await new Services.AttributeService().GetAll();
+            return await attributeService.GetAll();
+        }
+        [HttpPost]
+        [Route("AddAttribute")]
+        public async Task<BaseResponse> AddAttribute([FromBody] Models.dbModels.Attribute attribute)
+        {
+            return await attributeService.Add(attribute);
         }
     }
 }
