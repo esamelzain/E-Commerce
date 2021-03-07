@@ -140,18 +140,35 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public BaseResponse Edit()
+        public async Task<BaseResponse> Edit(Models.dbModels.Attribute Attribute)
         {
             try
             {
-                return new BaseResponse
+                var dbAttribute = await _db.Attributes.SingleOrDefaultAsync(attribute => attribute.Id == Attribute.Id);
+                if (dbAttribute == null)
                 {
-                    Message = new ResponseMessage
+                    return new BaseResponse
                     {
-                        Message = "Success",
-                        Code = 200
-                    }
-                };
+                        Message = new ResponseMessage
+                        {
+                            Message = "NotFound",
+                            Code = 404
+                        }
+                    };
+                }
+                else
+                {
+                    _db.Entry(dbAttribute).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                    return new BaseResponse
+                    {
+                        Message = new ResponseMessage
+                        {
+                            Message = "Success",
+                            Code = 200
+                        }
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -165,18 +182,35 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public BaseResponse Delete()
+        public async Task<BaseResponse> Delete(int Id)
         {
             try
             {
-                return new BaseResponse
+                var dbAttribute = await _db.Attributes.SingleOrDefaultAsync(attribute => attribute.Id == Id);
+                if (dbAttribute == null)
                 {
-                    Message = new ResponseMessage
+                    return new BaseResponse
                     {
-                        Message = "Success",
-                        Code = 200
-                    }
-                };
+                        Message = new ResponseMessage
+                        {
+                            Message = "NotFound",
+                            Code = 404
+                        }
+                    };
+                }
+                else
+                {
+                    _db.Attributes.Remove(dbAttribute);
+                    await _db.SaveChangesAsync();
+                    return new BaseResponse
+                    {
+                        Message = new ResponseMessage
+                        {
+                            Message = "Success",
+                            Code = 200
+                        }
+                    };
+                }
             }
             catch (Exception ex)
             {

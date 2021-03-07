@@ -1,10 +1,6 @@
 ﻿using E_CommerceApi.Models.vModels;
 using E_CommerceApi.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace E_CommerceApi.Controllers
@@ -25,10 +21,18 @@ namespace E_CommerceApi.Controllers
             return await attributeTypeService.GetAll();
         }
         [HttpPost]
-        [Route("Add")]
+        [Route("AddAll")]
         public async Task<BaseResponse> AddAttribute([FromBody] Models.dbModels.AttributeType attribute)
         {
             return await attributeTypeService.Add(attribute);
+        }
+
+
+        [HttpPost]
+        [Route("Post")]
+        public async Task<AttributeType> PostAttribute([FromBody] int Id)
+        {
+            return await attributeTypeService.Get(Id);
         }
     }
 }

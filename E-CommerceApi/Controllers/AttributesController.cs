@@ -30,5 +30,11 @@ namespace E_CommerceApi.Controllers
         {
             return await attributeService.Add(attribute);
         }
+        /*[HttpPost]
+        [Route("Get")]
+        public async Task<Models.vModels.Attribute> GetAttribute([FromBody]  int Id)
+        {
+            return await attributeService.Get(Id);
+        }*/
     }
 }
