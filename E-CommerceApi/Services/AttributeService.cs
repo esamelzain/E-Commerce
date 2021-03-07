@@ -1,4 +1,6 @@
-﻿using E_CommerceApi.Models.vModels;
+﻿using E_CommerceApi.Authentication;
+using E_CommerceApi.Models.vModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +10,40 @@ namespace E_CommerceApi.Services
 {
     public class AttributeService
     {
-        public BaseResponse GetAll()
+        private readonly ApplicationDbContext _db ;
+        public async Task<AllAttributes> GetAll()
         {
             try
             {
-                return new BaseResponse
+                var dbAttributes = await _db.Attributes.Where(attr=> (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
+                if (dbAttributes.Count>0)
                 {
-                    Message = new ResponseMessage
+                    return new AllAttributes
                     {
-                        Message = "Success",
-                        Code = 200
-                    }
-                };
+                        Attributes = dbAttributes,
+                        Message = new ResponseMessage
+                        {
+                            Message = "Success",
+                            Code = 200
+                        }
+                    };
+                }
+                else
+                {
+                    return new AllAttributes
+                    {
+                        Message = new ResponseMessage
+                        {
+                            Message = "Empty",
+                            Code = 410
+                        }
+                    };
+                }
+                
             }
             catch (Exception ex)
             {
-                return new BaseResponse
+                return new AllAttributes
                 {
                     Message = new ResponseMessage
                     {
@@ -33,22 +53,39 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public BaseResponse Get()
+        public Models.vModels.Attribute Get(int Id)
         {
             try
             {
-                return new BaseResponse
+                var dbAttribute = _db.Attributes.SingleOrDefault(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed&&attr.Id==Id);
+                if (dbAttribute != null)
                 {
-                    Message = new ResponseMessage
+                    return new Models.vModels.Attribute
                     {
-                        Message = "Success",
-                        Code = 200
-                    }
-                };
+                        AttributeResponse = dbAttribute,
+                        Message = new ResponseMessage
+                        {
+                            Message = "Success",
+                            Code = 200
+                        }
+                    };
+                }
+                else
+                {
+                    return new Models.vModels.Attribute
+                    {
+                        Message = new ResponseMessage
+                        {
+                            Message = "NotFound",
+                            Code = 404
+                        }
+                    };
+                }
+
             }
             catch (Exception ex)
             {
-                return new BaseResponse
+                return new Models.vModels.Attribute
                 {
                     Message = new ResponseMessage
                     {
@@ -58,10 +95,11 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public BaseResponse Add()
+        public BaseResponse Add(Models.dbModels.Attribute Attribute)
         {
             try
             {
+                _db.Attributes.Add(Attribute);
                 return new BaseResponse
                 {
                     Message = new ResponseMessage
