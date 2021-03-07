@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApi.Services
 {
-    public class AttributeService
+    public class AttributeTypeService
     {
         private readonly ApplicationDbContext _db;
-        public AttributeService(ApplicationDbContext db)
+        public AttributeTypeService(ApplicationDbContext db)
         {
             _db = db;
         }
-        public async Task<AllAttributes> GetAll()
+        public async Task<AllAttributeTypes> GetAll()
         {
             try
             {
-                var dbAttributes = await _db.Attributes.Where(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
-                if (dbAttributes.Count > 0)
+                var dbAttributeType = await _db.AttributeTypes.Where(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
+                if (dbAttributeType.Count > 0)
                 {
-                    return new AllAttributes
+                    return new AllAttributeTypes
                     {
-                        Attributes = dbAttributes,
+                        AttributeTypes = dbAttributeType,
                         Message = new ResponseMessage
                         {
                             Message = "Success",
@@ -34,7 +34,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    return new AllAttributes
+                    return new AllAttributeTypes
                     {
                         Message = new ResponseMessage
                         {
@@ -47,7 +47,7 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new AllAttributes
+                return new AllAttributeTypes
                 {
                     Message = new ResponseMessage
                     {
@@ -57,16 +57,16 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<Models.vModels.Attribute> Get(int Id)
+        public async Task<AttributeType> Get(int Id)
         {
             try
             {
-                var dbAttribute = await _db.Attributes.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
-                if (dbAttribute != null)
+                var dbAttributeType = await _db.Attributes.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
+                if (dbAttributeType != null)
                 {
-                    return new Models.vModels.Attribute
+                    return new AttributeType
                     {
-                        AttributeResponse = dbAttribute,
+                        AttributeTypeResponse = dbAttributeType,
                         Message = new ResponseMessage
                         {
                             Message = "Success",
@@ -76,7 +76,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    return new Models.vModels.Attribute
+                    return new AttributeType
                     {
                         Message = new ResponseMessage
                         {
@@ -89,7 +89,7 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new Models.vModels.Attribute
+                return new AttributeType
                 {
                     Message = new ResponseMessage
                     {
@@ -99,11 +99,11 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<BaseResponse> Add(Models.dbModels.Attribute Attribute)
+        public async Task<BaseResponse> Add(Models.dbModels.AttributeType attributeType)
         {
             try
             {
-                await _db.Attributes.AddAsync(Attribute);
+                await _db.AttributeTypes.AddAsync(attributeType);
                 await _db.SaveChangesAsync();
                 return new BaseResponse
                 {

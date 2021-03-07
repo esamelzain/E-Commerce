@@ -37,6 +37,8 @@ namespace E_CommerceApi
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
             // register services
             services.AddScoped<AttributeService>();
+            services.AddScoped<AttributeTypeService>();
+            //*//
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
