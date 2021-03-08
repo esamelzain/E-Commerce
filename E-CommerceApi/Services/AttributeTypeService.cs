@@ -57,16 +57,16 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<AttributeType> Get(int Id)
+        public async Task<AttributeTypeResponse> Get(int Id)
         {
             try
             {
-                var dbAttributeType = await _db.Attributes.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
+                var dbAttributeType = await _db.AttributeTypes.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
                 if (dbAttributeType != null)
                 {
-                    return new AttributeType
+                    return new AttributeTypeResponse
                     {
-                        AttributeTypeResponse = dbAttributeType,
+                        AttributeType = dbAttributeType,
                         Message = new ResponseMessage
                         {
                             Message = "Success",
@@ -76,7 +76,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    return new AttributeType
+                    return new AttributeTypeResponse
                     {
                         Message = new ResponseMessage
                         {
@@ -89,7 +89,7 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new AttributeType
+                return new AttributeTypeResponse
                 {
                     Message = new ResponseMessage
                     {

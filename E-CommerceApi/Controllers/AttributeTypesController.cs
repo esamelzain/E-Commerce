@@ -21,18 +21,28 @@ namespace E_CommerceApi.Controllers
             return await attributeTypeService.GetAll();
         }
         [HttpPost]
-        [Route("AddAll")]
-        public async Task<BaseResponse> AddAttribute([FromBody] Models.dbModels.AttributeType attribute)
+        [Route("Add")]
+        public async Task<BaseResponse> AddAttribute([FromBody] Models.dbModels.AttributeType attributeType)
         {
-            return await attributeTypeService.Add(attribute);
+            return await attributeTypeService.Add(attributeType);
         }
-
-
         [HttpPost]
-        [Route("Post")]
-        public async Task<AttributeType> PostAttribute([FromBody] int Id)
+        [Route("Get")]
+        public async Task<AttributeTypeResponse> GetAttributeType(int Id)
         {
             return await attributeTypeService.Get(Id);
+        }
+        [HttpPost]
+        [Route("Edit")]
+        public async Task<BaseResponse> EditAttributeType([FromBody] Models.dbModels.AttributeType attributeType)
+        {
+            return await attributeTypeService.Edit(attributeType);
+        }
+        [HttpPost]
+        [Route("Delete")]
+        public async Task<BaseResponse> DeleteAttributeType(int Id)
+        {
+            return await attributeTypeService.Delete(Id);
         }
     }
 }

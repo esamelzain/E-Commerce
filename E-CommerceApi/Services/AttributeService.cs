@@ -57,14 +57,14 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<Models.vModels.Attribute> Get(int Id)
+        public async Task<Models.vModels.AttributeRes> Get(int Id)
         {
             try
             {
                 var dbAttribute = await _db.Attributes.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.Id == Id);
                 if (dbAttribute != null)
                 {
-                    return new Models.vModels.Attribute
+                    return new Models.vModels.AttributeRes
                     {
                         AttributeResponse = dbAttribute,
                         Message = new ResponseMessage
@@ -76,7 +76,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    return new Models.vModels.Attribute
+                    return new Models.vModels.AttributeRes
                     {
                         Message = new ResponseMessage
                         {
@@ -89,7 +89,7 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new Models.vModels.Attribute
+                return new Models.vModels.AttributeRes
                 {
                     Message = new ResponseMessage
                     {

@@ -9,8 +9,8 @@ namespace E_CommerceApi.Models.vModels
     {
         public List<dbModels.AttributeType> AttributeTypes { get; set; }
     }
-    public class AttributeType : BaseResponse
+    public class AttributeTypeResponse : BaseResponse
     {
-        public dbModels.Attribute AttributeTypeResponse { get; set; }
+        public dbModels.AttributeType AttributeType { get; set; }
     }
 }

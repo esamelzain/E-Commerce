@@ -9,7 +9,7 @@ namespace E_CommerceApi.Models.vModels
     {
         public List<dbModels.Attribute> Attributes { get; set; }
     }
-    public class Attribute : BaseResponse
+    public class AttributeRes : BaseResponse
     {
         public dbModels.Attribute AttributeResponse { get; set; }
     }

@@ -30,11 +30,23 @@ namespace E_CommerceApi.Controllers
         {
             return await attributeService.Add(attribute);
         }
-        /*[HttpPost]
+        [HttpPost]
         [Route("Get")]
-        public async Task<Models.vModels.Attribute> GetAttribute([FromBody]  int Id)
+        public async Task<Models.vModels.AttributeRes> GetAttribute(int Id)
         {
             return await attributeService.Get(Id);
-        }*/
+        }
+        [HttpPost]
+        [Route("Edit")]
+        public async Task<BaseResponse> EditAttribute([FromBody] Models.dbModels.Attribute attribute)
+        {
+            return await attributeService.Edit(attribute);
+        }
+        [HttpPost]
+        [Route("Delete")]
+        public async Task<BaseResponse> DeleteAttribute(int Id)
+        {
+            return await attributeService.Delete(Id);
+        }
     }
 }
