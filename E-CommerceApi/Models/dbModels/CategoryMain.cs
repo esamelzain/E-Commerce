@@ -18,6 +18,7 @@ namespace E_CommerceApi.Models.dbModels
         public Nullable<System.DateTime> DateModified { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public virtual ICollection<CategoryDetails> CategoryDetails { get; set; }
     }
     public class CategoryDetails
     {

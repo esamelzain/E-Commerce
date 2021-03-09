@@ -40,6 +40,7 @@ namespace E_CommerceApi
             services.AddScoped<AttributeTypeService>();
             services.AddScoped<BrandService>();
             services.AddScoped<BrandImageService>();
+            services.AddScoped<CategoryMainService>();
             //*//
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
