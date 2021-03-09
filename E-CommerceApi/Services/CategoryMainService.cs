@@ -103,16 +103,16 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                    await _db.CategoryMain.AddAsync(CategoryMain);
-                    await _db.SaveChangesAsync();
-                    return new BaseResponse
+                await _db.CategoryMain.AddAsync(CategoryMain);
+                await _db.SaveChangesAsync();
+                return new BaseResponse
+                {
+                    Message = new ResponseMessage
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
-                    };
+                        Message = "Success",
+                        Code = 200
+                    }
+                };
             }
             catch (Exception ex)
             {

@@ -27,6 +27,5 @@ namespace E_CommerceApi.Authentication
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductMain> ProductMain { get; set; }
         public DbSet<ShippingProfile> ShippingProfiles { get; set; }
-        public DbSet<CategoryDetails> CategoryDetails { get; set; }
     }
 }

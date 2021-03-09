@@ -18,12 +18,6 @@ namespace E_CommerceApi.Models.dbModels
         public Nullable<System.DateTime> DateModified { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
-        public virtual ICollection<CategoryDetails> CategoryDetails { get; set; }
-    }
-    public class CategoryDetails
-    {
-        public long Id { get; set; }
-        public Nullable<long> CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryIcon { get; set; }
         public string CategoryImage { get; set; }
@@ -34,6 +28,5 @@ namespace E_CommerceApi.Models.dbModels
         public string ReadMoreLink { get; set; }
         public string CategoryLink { get; set; }
         public string CategoryMenuImage { get; set; }
-        public virtual CategoryMain CategoryMain { get; set; }
     }
 }
