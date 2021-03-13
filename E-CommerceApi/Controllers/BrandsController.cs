@@ -12,7 +12,6 @@ namespace E_CommerceApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors]
     public class BrandsController : ControllerBase
     {
         private readonly BrandService BrandService;
