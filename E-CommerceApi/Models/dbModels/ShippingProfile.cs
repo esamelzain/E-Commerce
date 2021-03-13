@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace E_CommerceApi.Models.dbModels
@@ -21,6 +22,7 @@ namespace E_CommerceApi.Models.dbModels
         public string Email { get; set; }
         public string MobileNumber { get; set; }
         public string ZipCode { get; set; }
+        [JsonIgnore]
         public virtual ApplicationUser User { get; set; }
     }
 }
