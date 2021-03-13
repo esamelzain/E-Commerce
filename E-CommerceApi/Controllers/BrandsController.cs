@@ -1,5 +1,6 @@
 ﻿using E_CommerceApi.Models.vModels;
 using E_CommerceApi.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace E_CommerceApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class BrandsController : ControllerBase
     {
         private readonly BrandService BrandService;

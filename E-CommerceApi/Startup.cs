@@ -114,7 +114,7 @@ namespace E_CommerceApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ASP.NET 5 Web API v1"));
 
