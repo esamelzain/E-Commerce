@@ -1,4 +1,5 @@
-﻿using E_CommerceApi.Models.vModels;
+﻿using E_CommerceApi.Models.dbModels;
+using E_CommerceApi.Models.vModels;
 using E_CommerceApi.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -45,9 +46,9 @@ namespace E_CommerceApi.Controllers
         }
         [HttpPost]
         [Route("Delete")]
-        public async Task<BaseResponse> DeleteBrand(int Id)
+        public async Task<BaseResponse> DeleteBrand(IdClass IdClass)
         {
-            return await BrandService.Delete(Id);
+            return await BrandService.Delete(IdClass.Id);
         }
     }
 }
