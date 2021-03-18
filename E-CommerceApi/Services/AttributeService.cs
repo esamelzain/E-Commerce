@@ -103,7 +103,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                if (_db.Attributes.Any(attribute => attribute.AttributeName == attribute.AttributeName))
+                if (_db.Attributes.Any(attribute => attribute.AttributeName == Attribute.AttributeName))
                 {
                     return new BaseResponse
                     {

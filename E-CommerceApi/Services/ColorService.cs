@@ -103,7 +103,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                if (_db.Colors.Any(Color => Color.ColorName == Color.ColorName))
+                if (_db.Colors.Any(color => color.ColorName == Color.ColorName))
                 {
                     return new BaseResponse
                     {

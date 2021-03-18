@@ -103,7 +103,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                if (_db.ShippingProfiles.Any(ShippingProfile => ShippingProfile.ProfileName == ShippingProfile.ProfileName))
+                if (_db.ShippingProfiles.Any(shippingProfile => shippingProfile.ProfileName == ShippingProfile.ProfileName))
                 {
                     return new BaseResponse
                     {

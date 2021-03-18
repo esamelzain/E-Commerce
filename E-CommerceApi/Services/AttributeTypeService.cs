@@ -99,11 +99,11 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<BaseResponse> Add(Models.dbModels.AttributeType attributeType)
+        public async Task<BaseResponse> Add(Models.dbModels.AttributeType AttributeType)
         {
             try
             {
-                if (_db.AttributeTypes.Any(attributetype=>attributetype.AttributeTypeName == attributeType.AttributeTypeName))
+                if (_db.AttributeTypes.Any(attributetype=>attributetype.AttributeTypeName == AttributeType.AttributeTypeName))
                 {
                     return new BaseResponse
                     {
@@ -116,7 +116,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    await _db.AttributeTypes.AddAsync(attributeType);
+                    await _db.AttributeTypes.AddAsync(AttributeType);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {

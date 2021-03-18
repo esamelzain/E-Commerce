@@ -103,7 +103,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                if (_db.Countries.Any(Country => Country.CountryName == Country.CountryName))
+                if (_db.Countries.Any(country => country.CountryName == Country.CountryName))
                 {
                     return new BaseResponse
                     {

@@ -103,7 +103,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                if (_db.Brands.Any(Brand => Brand.BrandName == Brand.BrandName))
+                if (_db.Brands.Any(brand => brand.BrandName == Brand.BrandName))
                 {
                     return new BaseResponse
                     {
@@ -144,7 +144,7 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                var dbBrand = await _db.Brands.SingleOrDefaultAsync(Brand => Brand.Id == Brand.Id);
+                var dbBrand = await _db.Brands.SingleOrDefaultAsync(brand => brand.Id == Brand.Id);
                 if (dbBrand == null)
                 {
                     return new BaseResponse
