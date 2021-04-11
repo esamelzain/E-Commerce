@@ -9,29 +9,29 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApi.Services
 {
-    public class Countrieservice
+    public class ProductsService
     {
         private readonly ApplicationDbContext _db;
-        public Countrieservice(ApplicationDbContext db)
+        public ProductsService(ApplicationDbContext db)
         {
             _db = db;
         }
-        public async Task<AllCountries> GetAll()
+        public async Task<AllProducts> GetAll()
         {
             try
             {
-                var dbCountries = await _db.Countries.ToListAsync();
-                if (dbCountries.Count > 0)
+                var dbProducts = await _db.ProductMain.Where(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed).ToListAsync();
+                if (dbProducts.Count > 0)
                 {
-                    return new AllCountries
+                    return new AllProducts
                     {
-                        Countries = dbCountries,
+                        Products = dbProducts,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new AllCountries
+                    return new AllProducts
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -40,28 +40,28 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new AllCountries
+                return new AllProducts
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<Models.vModels.CountryRes> Get(int Id)
+        public async Task<Models.vModels.ProductRes> Get(int Id)
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(country =>  country.Id == Id);
-                if (dbCountry != null)
+                var dbProduct = await _db.ProductMain.SingleOrDefaultAsync(attr => (bool)attr.IsActive && !(bool)attr.IsDeleted && !(bool)attr.IsTrashed && attr.ID == Id);
+                if (dbProduct != null)
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.ProductRes
                     {
-                        CountryResponse = dbCountry,
+                        ProductResponse = dbProduct,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.ProductRes
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -70,17 +70,17 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new Models.vModels.CountryRes
+                return new Models.vModels.ProductRes
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<BaseResponse> Add(Models.dbModels.Country Country)
+        public async Task<BaseResponse> Add(Models.dbModels.ProductMain Product)
         {
             try
             {
-                if (_db.Countries.Any(country => country.CountryName == Country.CountryName))
+                if (_db.ProductMain.Any(Product => Product.ProductName == Product.ProductName))
                 {
                     return new BaseResponse
                     {
@@ -89,7 +89,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    await _db.Countries.AddAsync(Country);
+                    await _db.ProductMain.AddAsync(Product);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
@@ -105,25 +105,25 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<BaseResponse> Edit(Models.dbModels.Country Country)
+        public async Task<BaseResponse> Edit(Models.dbModels.ProductMain Product)
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Country.Id);
-                if (dbCountry == null)
+                var dbProduct = await _db.ProductMain.SingleOrDefaultAsync(Product => Product.ID == Product.ID);
+                if (dbProduct == null)
                 {
                     return new BaseResponse
                     {
-                        Message = Helper.GetResponseMessage(402)
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    _db.Entry(dbCountry).State = EntityState.Modified;
+                    _db.Entry(dbProduct).State = EntityState.Modified;
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
-                        Message = Helper.GetResponseMessage(200)
+                        Message = Helper.GetResponseMessage(401)
                     };
                 }
             }
@@ -139,8 +139,8 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Id);
-                if (dbCountry == null)
+                var dbProduct = await _db.ProductMain.SingleOrDefaultAsync(Product => Product.ID == Id);
+                if (dbProduct == null)
                 {
                     return new BaseResponse
                     {
@@ -149,7 +149,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    _db.Countries.Remove(dbCountry);
+                    _db.ProductMain.Remove(dbProduct);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {

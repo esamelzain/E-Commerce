@@ -35,31 +35,6 @@ namespace E_CommerceApi.Controllers
         [Route("Add")]
         public async Task<BaseResponse> AddBrand([FromBody] Models.dbModels.Brand Brand)
         {
-            try
-            {
-                var file = Request.Form.Files[0];
-                string folderName = "Upload";
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine(webRootPath, folderName);
-                if (!Directory.Exists(newPath))
-                {
-                    Directory.CreateDirectory(newPath);
-                }
-                if (file.Length > 0)
-                {
-                    string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string fullPath = Path.Combine(newPath, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
             return await BrandService.Add(Brand);
         }
         [HttpPost]

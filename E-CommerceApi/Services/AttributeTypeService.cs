@@ -1,4 +1,5 @@
 ﻿using E_CommerceApi.Authentication;
+using E_CommerceApi.Handlers;
 using E_CommerceApi.Models.vModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,22 +26,14 @@ namespace E_CommerceApi.Services
                     return new AllAttributeTypes
                     {
                         AttributeTypes = dbAttributeType,
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
                     return new AllAttributeTypes
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Empty",
-                            Code = 410
-                        }
+                        Message = Helper.GetResponseMessage(402)
                     };
                 }
 
@@ -49,11 +42,7 @@ namespace E_CommerceApi.Services
             {
                 return new AllAttributeTypes
                 {
-                    Message = new ResponseMessage
-                    {
-                        Message = ex.Message,
-                        Code = 500
-                    }
+                    Message = Helper.GetResponseMessage(500)
                 };
             }
         }
@@ -67,22 +56,14 @@ namespace E_CommerceApi.Services
                     return new AttributeTypeResponse
                     {
                         AttributeType = dbAttributeType,
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
                     return new AttributeTypeResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "NotFound",
-                            Code = 404
-                        }
+                        Message = Helper.GetResponseMessage(402)
                     };
                 }
 
@@ -91,11 +72,7 @@ namespace E_CommerceApi.Services
             {
                 return new AttributeTypeResponse
                 {
-                    Message = new ResponseMessage
-                    {
-                        Message = ex.Message,
-                        Code = 500
-                    }
+                    Message = Helper.GetResponseMessage(500)
                 };
             }
         }
@@ -107,11 +84,7 @@ namespace E_CommerceApi.Services
                 {
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Exist",
-                            Code = 510
-                        }
+                        Message = Helper.GetResponseMessage(441)
                     };
                 }
                 else
@@ -120,11 +93,7 @@ namespace E_CommerceApi.Services
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
             }
@@ -132,11 +101,7 @@ namespace E_CommerceApi.Services
             {
                 return new BaseResponse
                 {
-                    Message = new ResponseMessage
-                    {
-                        Message = ex.Message,
-                        Code = 500
-                    }
+                    Message = Helper.GetResponseMessage(500)
                 };
             }
         }
@@ -149,25 +114,16 @@ namespace E_CommerceApi.Services
                 {
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "NotFound",
-                            Code = 404
-                        }
+                        Message = Helper.GetResponseMessage(402)
                     };
                 }
                 else
                 {
                     _db.Entry(attributeType).State = EntityState.Modified;
-                    //await _db.AttributeTypes.AddAsync(attributeType);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
             }
@@ -175,11 +131,7 @@ namespace E_CommerceApi.Services
             {
                 return new BaseResponse
                 {
-                    Message = new ResponseMessage
-                    {
-                        Message = ex.Message,
-                        Code = 500
-                    }
+                    Message = Helper.GetResponseMessage(500)
                 };
             }
         }
@@ -192,11 +144,7 @@ namespace E_CommerceApi.Services
                 {
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "NotFound",
-                            Code = 404
-                        }
+                        Message = Helper.GetResponseMessage(402)
                     };
                 }
                 else
@@ -205,11 +153,7 @@ namespace E_CommerceApi.Services
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
-                        Message = new ResponseMessage
-                        {
-                            Message = "Success",
-                            Code = 200
-                        }
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
             }
@@ -217,11 +161,7 @@ namespace E_CommerceApi.Services
             {
                 return new BaseResponse
                 {
-                    Message = new ResponseMessage
-                    {
-                        Message = ex.Message,
-                        Code = 500
-                    }
+                    Message = Helper.GetResponseMessage(500)
                 };
             }
         }

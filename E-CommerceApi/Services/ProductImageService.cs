@@ -9,29 +9,29 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApi.Services
 {
-    public class Countrieservice
+    public class ProductImageService
     {
         private readonly ApplicationDbContext _db;
-        public Countrieservice(ApplicationDbContext db)
+        public ProductImageService(ApplicationDbContext db)
         {
             _db = db;
         }
-        public async Task<AllCountries> GetAll()
+        public async Task<AllProductImageResponses> GetAll()
         {
             try
             {
-                var dbCountries = await _db.Countries.ToListAsync();
-                if (dbCountries.Count > 0)
+                var dbProductImages = await _db.ProductImages.ToListAsync();
+                if (dbProductImages.Count > 0)
                 {
-                    return new AllCountries
+                    return new AllProductImageResponses
                     {
-                        Countries = dbCountries,
+                        ProductImage = dbProductImages,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new AllCountries
+                    return new AllProductImageResponses
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -40,28 +40,28 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new AllCountries
+                return new AllProductImageResponses
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<Models.vModels.CountryRes> Get(int Id)
+        public async Task<Models.vModels.ProductImageRes> Get(int Id)
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(country =>  country.Id == Id);
-                if (dbCountry != null)
+                var dbProductImage = await _db.ProductImages.SingleOrDefaultAsync(ProductImage => ProductImage.Id == Id);
+                if (dbProductImage != null)
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.ProductImageRes
                     {
-                        CountryResponse = dbCountry,
+                        ProductImageResponse = dbProductImage,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.ProductImageRes
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -70,26 +70,46 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new Models.vModels.CountryRes
+                return new Models.vModels.ProductImageRes
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<BaseResponse> Add(Models.dbModels.Country Country)
+        public async Task<BaseResponse> Add(Models.dbModels.ProductImage ProductImage)
         {
             try
             {
-                if (_db.Countries.Any(country => country.CountryName == Country.CountryName))
+                await _db.ProductImages.AddAsync(ProductImage);
+                await _db.SaveChangesAsync();
+                return new BaseResponse
+                {
+                    Message = Helper.GetResponseMessage(200)
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse
+                {
+                    Message = Helper.GetResponseMessage(500)
+                };
+            }
+        }
+        public async Task<BaseResponse> Edit(Models.dbModels.ProductImage ProductImage)
+        {
+            try
+            {
+                var dbProductImage = await _db.ProductImages.SingleOrDefaultAsync(ProductImage => ProductImage.Id == ProductImage.Id);
+                if (dbProductImage == null)
                 {
                     return new BaseResponse
                     {
-                        Message = Helper.GetResponseMessage(441)
+                        Message = Helper.GetResponseMessage(402)
                     };
                 }
                 else
                 {
-                    await _db.Countries.AddAsync(Country);
+                    _db.Entry(dbProductImage).State = EntityState.Modified;
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
@@ -101,37 +121,11 @@ namespace E_CommerceApi.Services
             {
                 return new BaseResponse
                 {
-                    Message = Helper.GetResponseMessage(500)
-                };
-            }
-        }
-        public async Task<BaseResponse> Edit(Models.dbModels.Country Country)
-        {
-            try
-            {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Country.Id);
-                if (dbCountry == null)
-                {
-                    return new BaseResponse
+                    Message = new ResponseMessage
                     {
-                        Message = Helper.GetResponseMessage(402)
-                    };
-                }
-                else
-                {
-                    _db.Entry(dbCountry).State = EntityState.Modified;
-                    await _db.SaveChangesAsync();
-                    return new BaseResponse
-                    {
-                        Message = Helper.GetResponseMessage(200)
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                return new BaseResponse
-                {
-                    Message = Helper.GetResponseMessage(500)
+                        Message = ex.Message,
+                        Code = 500
+                    }
                 };
             }
         }
@@ -139,8 +133,8 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Id);
-                if (dbCountry == null)
+                var dbProductImage = await _db.ProductImages.SingleOrDefaultAsync(ProductImage => ProductImage.Id == Id);
+                if (dbProductImage == null)
                 {
                     return new BaseResponse
                     {
@@ -149,7 +143,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    _db.Countries.Remove(dbCountry);
+                    _db.ProductImages.Remove(dbProductImage);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {

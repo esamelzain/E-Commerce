@@ -9,29 +9,29 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApi.Services
 {
-    public class Countrieservice
+    public class CartMainService
     {
         private readonly ApplicationDbContext _db;
-        public Countrieservice(ApplicationDbContext db)
+        public CartMainService(ApplicationDbContext db)
         {
             _db = db;
         }
-        public async Task<AllCountries> GetAll()
+        public async Task<AllCartMains> GetAll()
         {
             try
             {
-                var dbCountries = await _db.Countries.ToListAsync();
-                if (dbCountries.Count > 0)
+                var dbCartMains = await _db.CartMain.ToListAsync();
+                if (dbCartMains.Count > 0)
                 {
-                    return new AllCountries
+                    return new AllCartMains
                     {
-                        Countries = dbCountries,
+                        CartMains = dbCartMains,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new AllCountries
+                    return new AllCartMains
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -40,28 +40,28 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new AllCountries
+                return new AllCartMains
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<Models.vModels.CountryRes> Get(int Id)
+        public async Task<CartMainRes> Get(int Id)
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(country =>  country.Id == Id);
-                if (dbCountry != null)
+                var dbCartMain = await _db.CartMain.SingleOrDefaultAsync(cart => cart.Id == Id);
+                if (dbCartMain != null)
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.CartMainRes
                     {
-                        CountryResponse = dbCountry,
+                        CartMainResponse = dbCartMain,
                         Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    return new Models.vModels.CountryRes
+                    return new Models.vModels.CartMainRes
                     {
                         Message = Helper.GetResponseMessage(402)
                     };
@@ -70,17 +70,47 @@ namespace E_CommerceApi.Services
             }
             catch (Exception ex)
             {
-                return new Models.vModels.CountryRes
+                return new Models.vModels.CartMainRes
                 {
                     Message = Helper.GetResponseMessage(500)
                 };
             }
         }
-        public async Task<BaseResponse> Add(Models.dbModels.Country Country)
+        public async Task<CartMainRes> GetByIpAdress(string IpAddress)
         {
             try
             {
-                if (_db.Countries.Any(country => country.CountryName == Country.CountryName))
+                var dbCartMain = await _db.CartMain.SingleOrDefaultAsync(cart => cart.IPAddress == IpAddress);
+                if (dbCartMain != null)
+                {
+                    return new Models.vModels.CartMainRes
+                    {
+                        CartMainResponse = dbCartMain,
+                        Message = Helper.GetResponseMessage(200)
+                    };
+                }
+                else
+                {
+                    return new Models.vModels.CartMainRes
+                    {
+                        Message = Helper.GetResponseMessage(402)
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return new Models.vModels.CartMainRes
+                {
+                    Message = Helper.GetResponseMessage(500)
+                };
+            }
+        }
+        public async Task<BaseResponse> Add(Models.dbModels.CartMain CartMain)
+        {
+            try
+            {
+                if (_db.CartMain.Any(CartMain => CartMain.IPAddress == CartMain.IPAddress))
                 {
                     return new BaseResponse
                     {
@@ -89,7 +119,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    await _db.Countries.AddAsync(Country);
+                    await _db.CartMain.AddAsync(CartMain);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
@@ -105,25 +135,25 @@ namespace E_CommerceApi.Services
                 };
             }
         }
-        public async Task<BaseResponse> Edit(Models.dbModels.Country Country)
+        public async Task<BaseResponse> Edit(Models.dbModels.CartMain CartMain)
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Country.Id);
-                if (dbCountry == null)
+                var dbCartMain = await _db.CartMain.SingleOrDefaultAsync(CartMain => CartMain.Id == CartMain.Id);
+                if (dbCartMain == null)
                 {
                     return new BaseResponse
                     {
-                        Message = Helper.GetResponseMessage(402)
+                        Message = Helper.GetResponseMessage(200)
                     };
                 }
                 else
                 {
-                    _db.Entry(dbCountry).State = EntityState.Modified;
+                    _db.Entry(dbCartMain).State = EntityState.Modified;
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
-                        Message = Helper.GetResponseMessage(200)
+                        Message = Helper.GetResponseMessage(401)
                     };
                 }
             }
@@ -139,8 +169,8 @@ namespace E_CommerceApi.Services
         {
             try
             {
-                var dbCountry = await _db.Countries.SingleOrDefaultAsync(Country => Country.Id == Id);
-                if (dbCountry == null)
+                var dbCartMain = await _db.CartMain.SingleOrDefaultAsync(CartMain => CartMain.Id == Id);
+                if (dbCartMain == null)
                 {
                     return new BaseResponse
                     {
@@ -149,7 +179,7 @@ namespace E_CommerceApi.Services
                 }
                 else
                 {
-                    _db.Countries.Remove(dbCountry);
+                    _db.CartMain.Remove(dbCartMain);
                     await _db.SaveChangesAsync();
                     return new BaseResponse
                     {
