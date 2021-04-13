@@ -27,7 +27,7 @@ namespace E_Commerce.Web
 
             //register services
             services.AddScoped<AttributeService>();
-            services.AddScoped<AttributeTypeService>();
+           /* services.AddScoped<AttributeTypeService>();
             services.AddScoped<BrandService>();
             services.AddScoped<BrandImageService>();
             services.AddScoped<CategoryMainService>();
@@ -36,7 +36,7 @@ namespace E_Commerce.Web
             services.AddScoped<ColorService>();
             services.AddScoped<Countrieservice>();
             services.AddScoped<ProductImageService>();
-            services.AddScoped<ShippingProfileService>();
+            services.AddScoped<ShippingProfileService>();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
