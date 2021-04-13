@@ -55,7 +55,7 @@ namespace E_CommerceApi
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders();                                        
 
             // Adding Authentication  
             services.AddAuthentication(options =>

@@ -1,3 +1,4 @@
+using E_CommerceApi.Handlers;
 using E_CommerceApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,10 +25,10 @@ namespace E_Commerce.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            //services.AddTransient<IAttributeService, AttributeService>();
             //register services
-            services.AddScoped<AttributeService>();
-           /* services.AddScoped<AttributeTypeService>();
+            /* services.AddScoped<AttributeService>();
+          services.AddScoped<AttributeTypeService>();
             services.AddScoped<BrandService>();
             services.AddScoped<BrandImageService>();
             services.AddScoped<CategoryMainService>();
