@@ -40,8 +40,8 @@ namespace E_CommerceApi
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
             // register services
-            services.AddScoped<AttributeService>();
-            services.AddScoped<AttributeTypeService>();
+            services.AddScoped<IAttributeService, AttributeService>();
+            services.AddScoped<IAttributeTypeService,AttributeTypeService>();
             services.AddScoped<BrandService>();
             services.AddScoped<BrandImageService>();
             services.AddScoped<CategoryMainService>();

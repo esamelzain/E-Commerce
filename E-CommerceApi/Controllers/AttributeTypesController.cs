@@ -9,8 +9,8 @@ namespace E_CommerceApi.Controllers
     [ApiController]
     public class AttributeTypesController : ControllerBase
     {
-        private readonly AttributeTypeService attributeTypeService;
-        public AttributeTypesController(AttributeTypeService _attributeTypeService)
+        private readonly IAttributeTypeService attributeTypeService;
+        public AttributeTypesController(IAttributeTypeService _attributeTypeService)
         {
             attributeTypeService = _attributeTypeService;
         }

@@ -1,7 +1,10 @@
+using E_Commerce.Web.Helpers;
+using E_CommerceApi.Authentication;
 using E_CommerceApi.Handlers;
 using E_CommerceApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +28,14 @@ namespace E_Commerce.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            //services.AddTransient<IAttributeService, AttributeService>();
+            services.AddScoped<HttpHandler>();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+            // register services
+            services.AddScoped<IAttributeService, AttributeService>();   
+            services.AddScoped<IAttributeTypeService,AttributeTypeService>();
+
             //register services
             /* services.AddScoped<AttributeService>();
-          services.AddScoped<AttributeTypeService>();
             services.AddScoped<BrandService>();
             services.AddScoped<BrandImageService>();
             services.AddScoped<CategoryMainService>();

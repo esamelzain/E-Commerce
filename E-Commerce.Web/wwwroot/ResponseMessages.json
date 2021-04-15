@@ -1,0 +1,90 @@
+﻿[
+  {
+    "Code": "200",
+    "Message": "Successful"
+  },
+  {
+    "Code": "210",
+    "Message": "Data Edited Successful"
+  },
+  {
+    "Code": "404",
+    "Message": "Login Failed, Please check your credentials!"
+  },
+  {
+    "Code": "402",
+    "Message": "Data Not Found"
+  },
+  {
+    "Code": "441",
+    "Message": "Already Exist"
+  },
+  {
+    "Code": "405",
+    "Message": "User Not Found"
+  },
+  {
+    "Code": "406",
+    "Message": "Bad Request"
+  },
+  {
+    "Code": "500",
+    "Message": "Internal Server Error"
+  },
+  {
+    "Code": "501",
+    "Message": "Login Attempts limit was exceeded!"
+  },
+  {
+    "Code": "502",
+    "Message": "Your Account is locked"
+  },
+  {
+    "Code": "503",
+    "Message": "Unauthorized access"
+  },
+  {
+    "Code": "504",
+    "Message": "No data to be reterived"
+  },
+  {
+    "Code": "505",
+    "Message": "Sorry, Invalid Benificiay Account"
+  },
+  {
+    "Code": "506",
+    "Message": "Sorry, Operation failed, please try again later"
+  },
+  {
+    "Code": "507",
+    "Message": "Sorry, Invalid Account Information"
+  },
+  {
+    "Code": "508",
+    "Message": "Sorry, Invalid Account Type"
+  },
+  {
+    "Code": "509",
+    "Message": "Sorry, Invalid Confirm Code"
+  },
+  {
+    "Code": "510",
+    "Message": "Sorry, Account already exists"
+  },
+  {
+    "Code": "511",
+    "Message": "Sorry, fill all required fields"
+  },
+  {
+    "Code": "512",
+    "Message": "Sorry, Invalid Customer Information"
+  },
+  {
+    "Code": "513",
+    "Message": "Sorry, You can't edit"
+  },
+  {
+    "Code": "514",
+    "Message": "Sorry, favorite number is already added"
+  }
+]

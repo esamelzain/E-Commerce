@@ -1,0 +1,86 @@
+﻿@model IEnumerable<E_CommerceApi.Models.dbModels.AttributeType>
+
+@{
+	ViewData["Title"] = "AttributeTypes";
+}
+
+<h1>AttributeTypes</h1>
+@await Component.InvokeAsync("ActionAttributeType")
+<div class="row">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+ Create new Type
+</button>
+</div>
+<table class="table">
+ <thead>
+  <tr>
+   <th>
+				@Html.DisplayNameFor(model => model.AttributeTypeName)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.IsActive)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.IsTrashed)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.IsDeleted)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.IsSearchable)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.DateCreated)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.DateModified)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.CreatedBy)
+   </th>
+   <th>
+				@Html.DisplayNameFor(model => model.ModifiedBy)
+   </th>
+   <th></th>
+  </tr>
+ </thead>
+ <tbody>
+		@foreach (var item in Model)
+		{
+	  <tr>
+	   <td>
+					@Html.DisplayFor(modelItem => item.AttributeTypeName)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.IsActive)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.IsTrashed)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.IsDeleted)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.IsSearchable)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.DateCreated)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.DateModified)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.CreatedBy)
+	   </td>
+	   <td>
+					@Html.DisplayFor(modelItem => item.ModifiedBy)
+	   </td>
+	   <td>
+		<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+		<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+		<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+	   </td>
+	  </tr>
+		}
+ </tbody>
+</table>

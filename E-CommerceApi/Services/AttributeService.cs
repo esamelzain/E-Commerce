@@ -9,7 +9,15 @@ using System.Threading.Tasks;
 
 namespace E_CommerceApi.Services
 {
-    public class AttributeService
+    public interface IAttributeService
+    {
+           Task<AllAttributes> GetAll();
+           Task<Models.vModels.AttributeRes> Get(int Id);
+           Task<BaseResponse> Add(Models.dbModels.Attribute Attribute);
+           Task<BaseResponse> Edit(Models.dbModels.Attribute Attribute);
+          Task<BaseResponse> Delete(int Id);
+    }
+    public class AttributeService : IAttributeService
     {
         private readonly ApplicationDbContext _db;
         public AttributeService(ApplicationDbContext db)

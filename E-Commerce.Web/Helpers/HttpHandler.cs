@@ -14,13 +14,13 @@ namespace E_Commerce.Web.Helpers
 
         public async Task<string> RequestUrl(object request, string url, string action)
         {
-            //url = "http://192.168.1.22:8090/MizanApi/";
+            string baseUrl = "http://localhost:58947/api/";
             var response = "";
             try
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri(url);
+                    client.BaseAddress = new Uri(baseUrl+"/"+url);
                     //HTTP POST                
                     var myContent = JsonConvert.SerializeObject(request);
                     var buffer = Encoding.UTF8.GetBytes(myContent);
@@ -28,7 +28,6 @@ namespace E_Commerce.Web.Helpers
                     byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                     var postTask = client.PostAsync(action, byteContent).Result;
                     response = await postTask.Content.ReadAsStringAsync();
-
                 }
             }
             catch (Exception ex)
@@ -37,7 +36,6 @@ namespace E_Commerce.Web.Helpers
             }
             return response;
         }
-
     }
 }
 

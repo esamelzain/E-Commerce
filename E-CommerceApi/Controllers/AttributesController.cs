@@ -13,8 +13,8 @@ namespace E_CommerceApi.Controllers
     [ApiController]
     public class AttributesController : ControllerBase
     {
-        private readonly AttributeService attributeService;
-        public AttributesController(AttributeService _attributeService)
+        private readonly IAttributeService attributeService;
+        public AttributesController(IAttributeService _attributeService)
         {
             attributeService = _attributeService;
         }
