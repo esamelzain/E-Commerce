@@ -4,7 +4,7 @@
 	ViewData["Title"] = "AttributeTypes";
 }
 
-<h1>AttributeTypes</h1>
+<h1>Attribute Types</h1>
 @await Component.InvokeAsync("ActionAttributeType")
 <div class="row">
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
@@ -15,31 +15,31 @@
  <thead>
   <tr>
    <th>
-				@Html.DisplayNameFor(model => model.AttributeTypeName)
+		@Html.DisplayNameFor(model => model.AttributeTypeName)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.IsActive)
+		@Html.DisplayNameFor(model => model.IsActive)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.IsTrashed)
+		@Html.DisplayNameFor(model => model.IsTrashed)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.IsDeleted)
+		@Html.DisplayNameFor(model => model.IsDeleted)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.IsSearchable)
+		@Html.DisplayNameFor(model => model.IsSearchable)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.DateCreated)
+		@Html.DisplayNameFor(model => model.DateCreated)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.DateModified)
+		@Html.DisplayNameFor(model => model.DateModified)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.CreatedBy)
+		@Html.DisplayNameFor(model => model.CreatedBy)
    </th>
    <th>
-				@Html.DisplayNameFor(model => model.ModifiedBy)
+		@Html.DisplayNameFor(model => model.ModifiedBy)
    </th>
    <th></th>
   </tr>
@@ -49,31 +49,31 @@
 		{
 	  <tr>
 	   <td>
-					@Html.DisplayFor(modelItem => item.AttributeTypeName)
+			@Html.DisplayFor(modelItem => item.AttributeTypeName)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.IsActive)
+			@Html.DisplayFor(modelItem => item.IsActive)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.IsTrashed)
+			@Html.DisplayFor(modelItem => item.IsTrashed)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.IsDeleted)
+			@Html.DisplayFor(modelItem => item.IsDeleted)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.IsSearchable)
+			@Html.DisplayFor(modelItem => item.IsSearchable)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.DateCreated)
+			@Html.DisplayFor(modelItem => item.DateCreated)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.DateModified)
+			@Html.DisplayFor(modelItem => item.DateModified)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.CreatedBy)
+			@Html.DisplayFor(modelItem => item.CreatedBy)
 	   </td>
 	   <td>
-					@Html.DisplayFor(modelItem => item.ModifiedBy)
+			@Html.DisplayFor(modelItem => item.ModifiedBy)
 	   </td>
 	   <td>
 		<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
